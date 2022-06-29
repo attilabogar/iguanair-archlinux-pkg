@@ -1,0 +1,19 @@
+--- files/systemd/lib/systemd/system/iguanaIR.service.orig	2017-08-06 12:48:07.000000000 +0000
++++ files/systemd/lib/systemd/system/iguanaIR.service	2019-06-28 22:25:39.043571286 +0000
+@@ -2,14 +2,14 @@
+ Description=Iguanaworks USB IR transceiver
+ 
+ [Service]
+-Type=forking
+ User=iguanair
+ Group=iguanair
+ EnvironmentFile=/etc/default/iguanaIR
+ ExecStart=/usr/bin/igdaemon $DRIVERS $OPTIONS \
+                             --log-level=${LOGLEVEL} \
+                             --send-timeout=${SENDTIMEOUT} \
+-                            --receive-timeout=${RECEIVETIMEOUT}
++                            --receive-timeout=${RECEIVETIMEOUT} \
++                            --no-daemon
+ 
+ [Install]
+ WantedBy=multi-user.target

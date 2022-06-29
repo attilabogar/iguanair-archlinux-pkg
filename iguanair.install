@@ -1,0 +1,5 @@
+post_install () {
+  getent group iguanair >/dev/null || groupadd -r iguanair
+  getent passwd iguanair >/dev/null || \
+    useradd -r -M -c "Iguanaworks IR Daemon" -d / -g iguanair -s /sbin/nologin iguanair 2>/dev/null || true
+}

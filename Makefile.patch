@@ -1,0 +1,20 @@
+--- Makefile.orig	2017-08-06 12:48:07.000000000 +0000
++++ Makefile	2019-06-29 00:24:08.397000085 +0000
+@@ -18,7 +18,7 @@
+ all:  $(driver).so
+ 
+ # OS X requires an additional linker flag  TODO: is it really OS X or clang?
+-LDFLAGS         += -liguanaIR -L../usb_ir/build/result
++LDFLAGS         += -liguanaIR -L$(IGUANADIR)/result
+ ifeq ("$(shell uname)", "Darwin")
+   LDFLAGS       += -Wl,-undefined,dynamic_lookup
+ endif
+@@ -42,7 +42,7 @@
+ $(driver).o: $(driver).c
+ 
+ $(driver).so: $(driver).o
+-	gcc --shared -fpic -o $@ $< $(LDFLAGS)
++	gcc --shared -fpic -o $@ $< $(IGUANADIR)/CMakeFiles/iguanaIR.dir/*.o $(LDFLAGS)
+ 
+ install: $(driver).so
+ 	install -D $< $(DESTDIR)$(PLUGINDIR)/$<
